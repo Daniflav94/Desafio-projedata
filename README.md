@@ -23,6 +23,6 @@ Diante disso, você deve desenvolver um projeto java, com os seguintes requisito
 3.11 – Imprimir o total dos salários dos funcionários.
 3.12 – Imprimir quantos salários mínimos ganha cada funcionário, considerando que o salário mínimo é R$1212.00.
 
-Saída terminal:
+### Saída terminal:
 
 ![Design sem nome (8)](https://github.com/Daniflav94/Desafio-projedata/assets/99519903/e9e5ef7d-52be-48ff-8fdd-249333ed33e7)
