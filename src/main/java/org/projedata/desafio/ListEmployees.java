@@ -15,8 +15,8 @@ public class ListEmployees {
         this.listEmployees = new ArrayList<>();
     }
 
-    public void add(Employee employee){
-        listEmployees.add(employee);
+    public void add(String name, LocalDate birthdate, BigDecimal salary, String role){
+        listEmployees.add(new Employee(name, birthdate, salary, role));
     }
 
     public void removeByName(String employeeName){

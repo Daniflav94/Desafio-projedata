@@ -3,8 +3,8 @@ package org.projedata.desafio;
 import java.time.LocalDate;
 
 public class Person {
-    protected String name;
-    protected LocalDate birthdate;
+    private String name;
+    private LocalDate birthdate;
 
     public Person(String name, LocalDate birthdate) {
         this.name = name;
