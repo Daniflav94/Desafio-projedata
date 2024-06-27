@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-        List<Employee> listEmployees = new ArrayList<Employee>();
+        ListEmployees listEmployees = new ListEmployees();
         listEmployees.add(new Employee("Maria", LocalDate.of(2000,10,18), new BigDecimal("2009.44"), "Operador"));
         listEmployees.add(new Employee("João", LocalDate.of(1990,5,12), new BigDecimal("2284.38"), "Operador"));
         listEmployees.add(new Employee("Caio", LocalDate.of(1961,5,2), new BigDecimal("9836.14"), "Coordenador"));
@@ -23,67 +23,22 @@ public class Main {
         listEmployees.add(new Employee("Heloísa", LocalDate.of(2003,5,24), new BigDecimal("1606.85"), "Eletricista"));
         listEmployees.add(new Employee("Helena", LocalDate.of(1996,9,2), new BigDecimal("2799.93"), "Gerente"));
 
-        listEmployees.removeIf(employee -> employee.getName().equals("João"));
+        listEmployees.removeByName("João");
 
-        System.out.println("\u001b[1mLista de funcionários: \u001b[m");
-        listEmployees.forEach(employee -> System.out.println(employee));
-        System.out.println("-----------------------------------------------------------------------------------------------");
+        listEmployees.listAll();
 
-        for(Employee employee : listEmployees){
-            employee.increaseSalary(10);
-        }
+        listEmployees.increaseAllSalary();
 
-        System.out.println("\u001b[1mLista de funcionários atualizada após aumento de salário: \u001b[m");
-        listEmployees.forEach(employee -> System.out.println(employee));
-        System.out.println("-----------------------------------------------------------------------------------------------");
+        listEmployees.groupingByRole();
 
-        Map<String, List<Employee>> employeesByRole = listEmployees.stream()
-                .collect(Collectors.groupingBy(Employee::getRole));
+        listEmployees.findByBirthdateOnMonth10And12();
 
-        System.out.println("\u001b[1mLista de funcionários agrupados por função: \u001b[m");
+       listEmployees.findOldestEmployee();
 
-        employeesByRole.forEach((role, employees) -> {
-            System.out.println("\u001b[1mFunção: \u001b[m" + role);
-            employees.forEach(employee -> System.out.println(employee));
-            System.out.println("-----------------------------------------------------------------------------------------------");
-        });
+       listEmployees.sortByAlphabeticalOrder();
 
-        System.out.println("\u001b[1mFuncionários que fazem aniversário nos meses 10 e 12: \u001b[m");
-        listEmployees.stream()
-                .filter(employee -> employee.getBirthdate().getMonthValue() == 10 || employee.getBirthdate().getMonthValue() == 12)
-                .forEach(employee -> System.out.println(employee));
+       listEmployees.getTotalSalary();
 
-        System.out.println("-----------------------------------------------------------------------------------------------");
-
-        Optional<Employee> oldestEmployee = listEmployees.stream()
-                .max(Comparator.comparing(employee -> Period.between(employee.getBirthdate(), LocalDate.now()).getYears()));
-
-        if (oldestEmployee.isPresent()) {
-            int age = Period.between(oldestEmployee.get().getBirthdate(), LocalDate.now()).getYears();
-            System.out.println("\u001b[1mFuncionário com a maior idade: \u001b[m");
-            System.out.println("Nome: " + oldestEmployee.get().getName() + ", Idade: " + age);
-        }
-
-        System.out.println("-----------------------------------------------------------------------------------------------");
-        System.out.println("\u001b[1mLista de funcionários por ordem alfabética: \u001b[m");
-        listEmployees.stream()
-                .sorted(Comparator.comparing(Employee::getName))
-                .forEach(employee -> System.out.println(employee));
-
-        System.out.println("-----------------------------------------------------------------------------------------------");
-        BigDecimal totalSalary = listEmployees.stream()
-                .map(Employee::getSalary)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
-
-        NumberFormat numberFormat = NumberFormat.getCurrencyInstance(new Locale("pt", "BR"));
-        numberFormat.setMinimumFractionDigits(2);
-        numberFormat.setMaximumFractionDigits(2);
-        numberFormat.setRoundingMode(RoundingMode.HALF_UP);
-        System.out.println("\u001b[1mTotal salários: \u001b[m" + numberFormat.format(totalSalary));
-
-        System.out.println("-----------------------------------------------------------------------------------------------");
-        System.out.println("\u001b[1mQuantidade de salários mínimos recebidos por cada funcionário: \u001b[m");
-        BigDecimal minimumSalary = new BigDecimal("1212");
-        listEmployees.forEach(employee -> System.out.println("Nome: " + employee.getName() + ", Salários mínimos: " + employee.getSalary().divide(minimumSalary, 2, RoundingMode.HALF_UP)));
+       listEmployees.getMinimunSalary();
     }
 }
