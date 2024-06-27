@@ -1,12 +1,8 @@
 package org.projedata.desafio;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.NumberFormat;
 import java.time.LocalDate;
-import java.time.Period;
-import java.util.*;
-import java.util.stream.Collectors;
+
 
 public class Main {
     public static void main(String[] args) {
@@ -33,12 +29,12 @@ public class Main {
 
         listEmployees.findByBirthdateOnMonth10And12();
 
-       listEmployees.findOldestEmployee();
+        listEmployees.findOldestEmployee();
 
-       listEmployees.sortByAlphabeticalOrder();
+        listEmployees.sortByAlphabeticalOrder();
 
-       listEmployees.getTotalSalary();
+        listEmployees.getTotalSalary();
 
-       listEmployees.getMinimunSalary();
+        listEmployees.getMinimunSalary();
     }
 }
